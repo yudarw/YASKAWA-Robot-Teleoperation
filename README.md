@@ -30,10 +30,10 @@ The program is written in `Visual Studio 2019 C++`. However, we need to install 
    * C:\OpenHaptics\Developer\3.4.0\lib\Win32\Release
  
 4. We also need to specify the name of the lib files. Under the `Linker` select `Input` and then add the following lib files.
-```
-hd.lib
-hdu.lib
-hl.lib
-ws2_32.lib
-```
+    ```
+    hd.lib
+    hdu.lib
+    hl.lib
+    ws2_32.lib
+    ```
   
