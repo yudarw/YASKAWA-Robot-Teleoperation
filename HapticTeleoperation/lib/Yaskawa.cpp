@@ -331,9 +331,14 @@ void Yaskawa::moveL(dataPos pos, double speed, bool wait) {
 		printf("> Error: Select the mode to remote mode. \n");
 		return;
 	}
+
 	if (status[m_Alarm] == 1) {
 		printf("> Alarm Error!!!! \n");
+		alarmIsActive = true;
 		return;
+	}
+	else {
+		alarmIsActive = false;
 	}
 
 	sprintf(temp, "%i,%f,%i,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%i,%i,%i,%i,%i,%i,%i,%i\r",

@@ -87,10 +87,10 @@ void thread_haptic_teleoperation(void*) {
 			// Teleoperation parameters:
 			double Km, Bm, Ks, Bs, Kg, Bg;
 
-			Km = 0.01;
-			Bm = 0.0001;
-			Ks = 0.01;
-			Bs = 0.0001;
+			Km = 0.02;
+			Bm = 0.00015;
+			Ks = 0.3;
+			Bs = 0.00025;
 
 			Xm = Xs0 + (Xh - Xh0);
 			Xs = Xr;

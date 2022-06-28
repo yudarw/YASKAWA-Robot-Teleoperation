@@ -109,6 +109,7 @@ public:
 	bool	run;
 	bool	isStreaming;
 	char	pRecv[512];
+	bool	alarmIsActive;
 	dataPos	global_pos;
 	int		status[16];
 };	
