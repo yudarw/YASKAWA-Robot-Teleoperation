@@ -61,21 +61,18 @@ void MyForm::updateUI() {
 void MyForm::button_haptic_connect() {
 	if (!haptic.connected) {
 		if (haptic.init() != -1) {
-			label_haptic->Text = "CONNECTED";
-			label_haptic->ForeColor = Color::Green;
+			led_haptic->BackColor = Color::Lime;
 			btn_haptic_connect->Text = "Haptic Disconnect";
 		}
 		else {
-			label_haptic->Text = "Connection Failed";
-			label_haptic->ForeColor = Color::Red;
+			led_haptic->BackColor = Color::Red;
 		}
 	}
 
 	else {
 		haptic.close();
 		btn_haptic_connect->Text = "Haptic Connect";
-		label_haptic->Text = "DISCONNECTED";
-		label_haptic->ForeColor = Color::Black;
+		led_haptic->BackColor = Color::Red;
 	}
 
 }
@@ -84,20 +81,29 @@ void MyForm::button_haptic_connect() {
 void MyForm::button_robot_connect() {
 	if (!robot.isConnected) {
 		if (robot.tcp_connect("192.168.171.222") != 0) {
-			label_robot->Text = "CONNECTED";
-			label_robot->ForeColor = Color::Green;
-			btn_robot->Text = "Yaskawa Disconnected";
+			robot.send_command("CONNECT Robot_access Keep-Alive:50000\r", robot.pRecv);
+			led_robot->BackColor = Color::Lime;
+			btn_robot->Text = "Yaskawa Disconnect";
 		}
 		else {
-			label_haptic->Text = "Connection Failed";
-			label_haptic->ForeColor = Color::Red;
+			led_haptic->BackColor = Color::Red;
 		}
 	}
 
 	else {
 		robot.disconnect();
-		btn_robot->Text = "Yaskawa Disconnected";
-		label_robot->Text = "DISCONNECTED";
-		label_robot->ForeColor = Color::Black;
+		btn_robot->Text = "Yaskawa Connect";
+		led_robot->BackColor = Color::Red;
+	}
+}
+
+
+// Robot test connection:
+void MyForm::btn_robot_test_connection() {
+	dataPos pos;
+
+	if (robot.isConnected) {
+		pos = robot.read_cartesianPos(0);
+		printf("Robot Position: %.3f, %.3f, %.3f, %.3f, %.3f, %.3f \n", pos.X, pos.Y, pos.Z, pos.W, pos.P, pos.R);
 	}
 }

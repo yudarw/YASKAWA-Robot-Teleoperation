@@ -94,7 +94,7 @@ int Yaskawa::tcp_connect(string ip_address)
 		return 0;
 	}
 
-	//cout << "> Robot is connected. Socket: " << sock << endl;
+	
 	this->_sock = sock;
 	this->isConnected = true;
 	return sock;

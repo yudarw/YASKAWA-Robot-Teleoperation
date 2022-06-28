@@ -28,6 +28,7 @@ namespace HapticTeleoperation {
 		void on_init();
 		void on_timer();
 		void updateUI();
+		void btn_robot_test_connection();
 
 	protected:
 		/// <summary>
@@ -50,9 +51,9 @@ namespace HapticTeleoperation {
 	private: System::Windows::Forms::TabControl^ tabControl1;
 	private: System::Windows::Forms::TabPage^ tabPage1;
 
-	private: System::Windows::Forms::Label^ label_robot;
-	private: System::Windows::Forms::Label^ label4;
-	private: System::Windows::Forms::Label^ label_haptic;
+
+
+
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::GroupBox^ groupBox1;
 	private: System::Windows::Forms::RadioButton^ rb_haptic;
@@ -80,6 +81,11 @@ namespace HapticTeleoperation {
 	private: System::Windows::Forms::Button^ btn_robot;
 	private: System::Windows::Forms::CheckBox^ checkBox_streaming;
 	private: System::Windows::Forms::Timer^ timer1;
+	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::Label^ label9;
+	private: System::Windows::Forms::Panel^ led_robot;
+	private: System::Windows::Forms::Label^ label4;
+	private: System::Windows::Forms::Panel^ led_haptic;
 	private: System::ComponentModel::IContainer^ components;
 
 
@@ -123,13 +129,15 @@ namespace HapticTeleoperation {
 			this->tb_pos_x = (gcnew System::Windows::Forms::TextBox());
 			this->rb_robot = (gcnew System::Windows::Forms::RadioButton());
 			this->rb_haptic = (gcnew System::Windows::Forms::RadioButton());
-			this->label_robot = (gcnew System::Windows::Forms::Label());
-			this->label4 = (gcnew System::Windows::Forms::Label());
-			this->label_haptic = (gcnew System::Windows::Forms::Label());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->btn_robot = (gcnew System::Windows::Forms::Button());
 			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->led_haptic = (gcnew System::Windows::Forms::Panel());
+			this->led_robot = (gcnew System::Windows::Forms::Panel());
+			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->label9 = (gcnew System::Windows::Forms::Label());
 			this->tabControl1->SuspendLayout();
 			this->tabPage1->SuspendLayout();
 			this->groupBox1->SuspendLayout();
@@ -137,7 +145,7 @@ namespace HapticTeleoperation {
 			// 
 			// btn_haptic_connect
 			// 
-			this->btn_haptic_connect->Location = System::Drawing::Point(184, 274);
+			this->btn_haptic_connect->Location = System::Drawing::Point(170, 274);
 			this->btn_haptic_connect->Name = L"btn_haptic_connect";
 			this->btn_haptic_connect->Size = System::Drawing::Size(141, 30);
 			this->btn_haptic_connect->TabIndex = 2;
@@ -153,7 +161,7 @@ namespace HapticTeleoperation {
 			this->tabPage2->Padding = System::Windows::Forms::Padding(2);
 			this->tabPage2->Size = System::Drawing::Size(312, 233);
 			this->tabPage2->TabIndex = 1;
-			this->tabPage2->Text = L"Robot";
+			this->tabPage2->Text = L"Properties";
 			this->tabPage2->UseVisualStyleBackColor = true;
 			// 
 			// tabControl1
@@ -165,15 +173,16 @@ namespace HapticTeleoperation {
 			this->tabControl1->Name = L"tabControl1";
 			this->tabControl1->SelectedIndex = 0;
 			this->tabControl1->Size = System::Drawing::Size(320, 259);
-			this->tabControl1->SizeMode = System::Windows::Forms::TabSizeMode::Fixed;
+			this->tabControl1->SizeMode = System::Windows::Forms::TabSizeMode::FillToRight;
 			this->tabControl1->TabIndex = 3;
 			// 
 			// tabPage1
 			// 
-			this->tabPage1->Controls->Add(this->groupBox1);
-			this->tabPage1->Controls->Add(this->label_robot);
+			this->tabPage1->Controls->Add(this->label9);
+			this->tabPage1->Controls->Add(this->led_robot);
 			this->tabPage1->Controls->Add(this->label4);
-			this->tabPage1->Controls->Add(this->label_haptic);
+			this->tabPage1->Controls->Add(this->led_haptic);
+			this->tabPage1->Controls->Add(this->groupBox1);
 			this->tabPage1->Controls->Add(this->label1);
 			this->tabPage1->Location = System::Drawing::Point(4, 22);
 			this->tabPage1->Margin = System::Windows::Forms::Padding(2);
@@ -201,9 +210,9 @@ namespace HapticTeleoperation {
 			this->groupBox1->Controls->Add(this->tb_pos_x);
 			this->groupBox1->Controls->Add(this->rb_robot);
 			this->groupBox1->Controls->Add(this->rb_haptic);
-			this->groupBox1->Location = System::Drawing::Point(5, 66);
+			this->groupBox1->Location = System::Drawing::Point(3, 51);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(302, 162);
+			this->groupBox1->Size = System::Drawing::Size(302, 177);
 			this->groupBox1->TabIndex = 6;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Position";
@@ -349,45 +358,18 @@ namespace HapticTeleoperation {
 			this->rb_haptic->UseVisualStyleBackColor = true;
 			this->rb_haptic->CheckedChanged += gcnew System::EventHandler(this, &MyForm::radioButton2_CheckedChanged);
 			// 
-			// label_robot
-			// 
-			this->label_robot->AutoSize = true;
-			this->label_robot->Location = System::Drawing::Point(61, 38);
-			this->label_robot->Name = L"label_robot";
-			this->label_robot->Size = System::Drawing::Size(92, 13);
-			this->label_robot->TabIndex = 3;
-			this->label_robot->Text = L"DISCONNECTED";
-			// 
-			// label4
-			// 
-			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(11, 38);
-			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(42, 13);
-			this->label4->TabIndex = 2;
-			this->label4->Text = L"Robot :";
-			// 
-			// label_haptic
-			// 
-			this->label_haptic->AutoSize = true;
-			this->label_haptic->Location = System::Drawing::Point(61, 16);
-			this->label_haptic->Name = L"label_haptic";
-			this->label_haptic->Size = System::Drawing::Size(92, 13);
-			this->label_haptic->TabIndex = 1;
-			this->label_haptic->Text = L"DISCONNECTED";
-			// 
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(11, 16);
+			this->label1->Location = System::Drawing::Point(145, 15);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(44, 13);
+			this->label1->Size = System::Drawing::Size(38, 13);
 			this->label1->TabIndex = 0;
-			this->label1->Text = L"Haptic :";
+			this->label1->Text = L"Haptic";
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(184, 310);
+			this->button2->Location = System::Drawing::Point(170, 310);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(140, 30);
 			this->button2->TabIndex = 5;
@@ -396,7 +378,7 @@ namespace HapticTeleoperation {
 			// 
 			// btn_robot
 			// 
-			this->btn_robot->Location = System::Drawing::Point(37, 274);
+			this->btn_robot->Location = System::Drawing::Point(23, 274);
 			this->btn_robot->Name = L"btn_robot";
 			this->btn_robot->Size = System::Drawing::Size(141, 30);
 			this->btn_robot->TabIndex = 6;
@@ -408,11 +390,58 @@ namespace HapticTeleoperation {
 			// 
 			this->timer1->Tick += gcnew System::EventHandler(this, &MyForm::timer1_Tick);
 			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(23, 310);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(141, 30);
+			this->button1->TabIndex = 7;
+			this->button1->Text = L"Yaskawa Test";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &MyForm::button1_Click_2);
+			// 
+			// led_haptic
+			// 
+			this->led_haptic->BackColor = System::Drawing::Color::Red;
+			this->led_haptic->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
+			this->led_haptic->Location = System::Drawing::Point(124, 15);
+			this->led_haptic->Name = L"led_haptic";
+			this->led_haptic->Size = System::Drawing::Size(15, 15);
+			this->led_haptic->TabIndex = 7;
+			// 
+			// led_robot
+			// 
+			this->led_robot->BackColor = System::Drawing::Color::Red;
+			this->led_robot->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
+			this->led_robot->Location = System::Drawing::Point(195, 15);
+			this->led_robot->Name = L"led_robot";
+			this->led_robot->Size = System::Drawing::Size(15, 15);
+			this->led_robot->TabIndex = 9;
+			// 
+			// label4
+			// 
+			this->label4->AutoSize = true;
+			this->label4->Location = System::Drawing::Point(216, 15);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(36, 13);
+			this->label4->TabIndex = 8;
+			this->label4->Text = L"Robot";
+			// 
+			// label9
+			// 
+			this->label9->AutoSize = true;
+			this->label9->Location = System::Drawing::Point(7, 15);
+			this->label9->Name = L"label9";
+			this->label9->Size = System::Drawing::Size(101, 13);
+			this->label9->TabIndex = 10;
+			this->label9->Text = L"Device Connection:";
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(336, 352);
+			this->Controls->Add(this->button1);
 			this->Controls->Add(this->btn_robot);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->btn_haptic_connect);
@@ -444,6 +473,9 @@ private: System::Void button1_Click_1(System::Object^ sender, System::EventArgs^
 }
 private: System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e) {
 	on_timer();
+}
+private: System::Void button1_Click_2(System::Object^ sender, System::EventArgs^ e) {
+	btn_robot_test_connection();
 }
 };
 }
