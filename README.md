@@ -8,7 +8,9 @@ An interface to control a YASKAWA GP7-YRC1000 industrial robotic arm through a t
 ## Driver Installation
 
 If you are fisrt time using haptic, you need to install the haptic driver and the OpenHaptic plugin for C++. Find the driver in the link below.
+
 Open Haptic 3.4 : https://support.3dsystems.com/s/article/OpenHaptics-for-Windows-Developer-Edition-v34?language=en_US
+
 3DS Haptic Driver: https://support.3dsystems.com/s/article/Haptic-Device-Drivers?language=en_US
 
 ## Project configuration
