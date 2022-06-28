@@ -1,7 +1,7 @@
 # YASKAWA-Robot-Teleoperation
 
 An interface to control a YASKAWA GP7-YRC1000 industrial robotic arm through a teleoperation method. This project uses a 3DS Haptic Teleoperation device to control the robot. 
-![Config](images/UI-interface.PNG)
+![Config](images/ui_interface.PNG)
 
 ## Project configuration
 
