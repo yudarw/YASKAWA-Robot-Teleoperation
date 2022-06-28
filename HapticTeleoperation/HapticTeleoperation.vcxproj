@@ -127,6 +127,7 @@
     <ClCompile Include="lib\Yaskawa.cpp" />
     <ClCompile Include="MyForm.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="TeleoperationMethod.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\HomogeneousTransform.h" />
@@ -135,6 +136,7 @@
     <ClInclude Include="MyForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="TeleoperationMethod.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MyForm.resx">

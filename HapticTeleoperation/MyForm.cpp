@@ -11,7 +11,6 @@ OpenHaptic	haptic;
 Yaskawa		robot;
 
 
-
 // Program initialization
 void MyForm::on_init() {
 	rb_haptic->Checked = true;
@@ -101,7 +100,6 @@ void MyForm::button_robot_connect() {
 // Robot test connection:
 void MyForm::btn_robot_test_connection() {
 	dataPos pos;
-
 	if (robot.isConnected) {
 		pos = robot.read_cartesianPos(0);
 		printf("Robot Position: %.3f, %.3f, %.3f, %.3f, %.3f, %.3f \n", pos.X, pos.Y, pos.Z, pos.W, pos.P, pos.R);
