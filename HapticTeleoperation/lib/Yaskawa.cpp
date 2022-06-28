@@ -85,7 +85,7 @@ int Yaskawa::tcp_connect(string ip_address)
 	if (err == SOCKET_ERROR) {
 		printf ("DoEcho: connect failed: %ld\n", GetLastError ());
 		closesocket(sock);
-		this->isConnected = false;
+		this->connected = false;
 		return 0;
 	}
 
@@ -94,9 +94,9 @@ int Yaskawa::tcp_connect(string ip_address)
 		return 0;
 	}
 
-	
+	printf("\n>>> Yaskawa connection success... \n");
 	this->_sock = sock;
-	this->isConnected = true;
+	this->connected = true;
 	return sock;
 }
 
@@ -104,7 +104,7 @@ void Yaskawa::disconnect()
 {
 	closesocket(_sock);
 	WSACleanup();
-	isConnected = false;
+	connected = false;
 }
 
 void Yaskawa::send_command(char* pSend, char* pRecv) {
@@ -157,7 +157,7 @@ dataPos Yaskawa::setDataPos(double pos[9])
 
 void Yaskawa::read_state()
 {
-	if (!isConnected) { return;  }
+	if (!connected) { return;  }
 
 	int data1 = 0, data2 = 0;	
 	int next;
@@ -195,7 +195,7 @@ void Yaskawa::read_state()
 // Turns servo power supply OFF:
 void Yaskawa::SVOFF()
 {
-	if (this->isConnected == false) {
+	if (this->connected == false) {
 		printf("> Servo OFF failed! Robot is not connected! \n");
 		return;
 	}
@@ -217,7 +217,7 @@ void Yaskawa::SVOFF()
 // Turns servo power supply ON:
 void Yaskawa::SVON()
 {
-	if (this->isConnected == false) {
+	if (this->connected == false) {
 		printf("> Servo ON failed! Robot is not connected! \n");
 		return;
 	}
@@ -245,7 +245,7 @@ dataPos Yaskawa::read_cartesianPos(int coordinate_system)
 	char pRecv[512];
 	dataPos pos;
 	
-	if (!isConnected) {
+	if (!connected) {
 		return pos;
 	}
 
@@ -316,7 +316,7 @@ void Yaskawa::moveL(dataPos pos, double speed, bool wait) {
 
 	pos.COORD = 0;
 
-	if (!isConnected) {
+	if (!connected) {
 		printf("> Error: Robot is not connected! ");
 	}
 
@@ -421,7 +421,7 @@ void Yaskawa::waitMoving(dataPos target_pos)
 	target_pos.R = abs(target_pos.R);
 
 	isMoving = true;
-	while (isMoving && isConnected) {
+	while (isMoving && connected) {
 		read_state();
 		global_pos = read_cartesianPos(0);
 		curPos	 = global_pos;

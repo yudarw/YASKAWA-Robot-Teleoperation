@@ -104,7 +104,7 @@ public:
 public:
 	SOCKET	_sock;
 	bool	servoIsActive;
-	bool	isConnected;
+	bool	connected;
 	bool	isMoving;
 	bool	run;
 	bool	isStreaming;

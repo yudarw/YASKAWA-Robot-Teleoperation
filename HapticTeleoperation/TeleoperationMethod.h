@@ -5,4 +5,5 @@
 
 extern OpenHaptic	haptic;
 extern Yaskawa		robot;
-
+extern bool haptic_jog_mode;
+extern void thread_haptic_teleoperation(void*);
